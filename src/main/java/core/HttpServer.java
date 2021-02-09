@@ -6,11 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
-public class Server extends NanoHTTPD {
+public class HttpServer extends NanoHTTPD {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(Server.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
 
-    public Server(int port) throws IOException {
+    public HttpServer(int port) throws IOException {
         super(port);
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
         System.out.printf("Starting on port %d\n", port);
@@ -26,6 +26,7 @@ public class Server extends NanoHTTPD {
                 String body = new String(buf);
                 if (body.length() > 0)
                     processBody(body);
+
                 return newFixedLengthResponse("OK");
             } catch (IOException e) {
                 LOGGER.error("Error", e);

@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             new Console();
-            new Server(80);
+            new HttpServer(80);
             SyncManager.getInstance().start();
         } catch (Throwable e) {
             LOGGER.error("Could not start up!", e);
