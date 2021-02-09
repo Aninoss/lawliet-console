@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'com.google.cloud.tools.jib' version '2.7.1'
+}
+
+group 'xyz.lawlietbot'
+version 'latest'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
+    implementation 'org.json:json:20180813'
+    implementation 'org.java-websocket:Java-WebSocket:1.5.1'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'org.apache.logging.log4j:log4j-to-slf4j:2.13.1'
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'core.Main'
+    }
+}
