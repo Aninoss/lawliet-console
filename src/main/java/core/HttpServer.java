@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class HttpServer extends NanoHTTPD {
 
@@ -39,11 +40,15 @@ public class HttpServer extends NanoHTTPD {
     }
 
     private void processBody(String body) {
-        JSONObject data = new JSONObject(body);
-        if (data.getString("source").equals("stdout"))
-            System.out.println(data.getString("log"));
-        else
-            System.err.println(data.getString("log"));
+        Arrays.stream(body.split("\n"))
+                .filter(s -> s.length() > 0)
+                .forEach(str -> {
+                    JSONObject data = new JSONObject(str);
+                    if (data.getString("source").equals("stdout"))
+                        System.out.println(data.getString("log"));
+                    else
+                        System.err.println(data.getString("log"));
+                });
     }
 
 }

@@ -133,13 +133,14 @@ public class CustomWebSocketClient extends WebSocketClient {
 
         content.put("request_id", id);
         content.put("is_response", false);
+        outCache.put(id, future);
         try {
             send(event + "::" + content.toString());
         } catch (Throwable e) {
+            outCache.remove(id);
             future.completeExceptionally(e);
             return future;
         }
-        outCache.put(id, future);
 
         MainScheduler.getInstance().schedule(5, ChronoUnit.SECONDS, "websocket_" + event, () -> {
             if (outCache.containsKey(id)) {
