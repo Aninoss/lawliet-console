@@ -1,5 +1,8 @@
 package syncserver;
 
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.client.WebSocketJsonClient;
+
 import java.net.URISyntaxException;
 
 public class SyncManager {
@@ -10,15 +13,16 @@ public class SyncManager {
         return ourInstance;
     }
 
-    private final CustomWebSocketClient client;
+    private final WebSocketJsonClient client;
     private boolean started = false;
 
     private SyncManager() {
         try {
-            client = new CustomWebSocketClient(
+            client = new WebSocketJsonClient(
                     System.getenv("SYNC_HOST"),
                     Integer.parseInt(System.getenv("SYNC_PORT")),
-                    "console"
+                    "console",
+                    System.getenv("SYNC_AUTH")
             );
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
@@ -33,7 +37,7 @@ public class SyncManager {
         this.client.connect();
     }
 
-    public CustomWebSocketClient getClient() {
+    public WebSocketJsonClient getClient() {
         return client;
     }
 
