@@ -7,6 +7,7 @@ import syncserver.SendEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Console {
 
@@ -17,22 +18,17 @@ public class Console {
     }
 
     private void run() {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            try {
-                if (br.ready()) {
-                    String line = br.readLine();
-                    if (line.length() > 0) {
-                        try {
-                            processInput(line);
-                        } catch (Throwable e) {
-                            LOGGER.error("Error", e);
-                        }
+            if (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                if (line.length() > 0) {
+                    try {
+                        processInput(line);
+                    } catch (Throwable e) {
+                        LOGGER.error("Error", e);
                     }
                 }
-                Thread.sleep(100);
-            } catch (IOException | InterruptedException e) {
-                LOGGER.error("Unexpected console exception", e);
             }
         }
     }
