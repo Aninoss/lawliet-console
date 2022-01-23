@@ -14,7 +14,7 @@ public class HttpServer extends NanoHTTPD {
     public HttpServer(int port) throws IOException {
         super(port);
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-        System.out.printf("Starting on port %d\n", port);
+        LOGGER.info("Starting on port {}", port);
     }
 
     @Override

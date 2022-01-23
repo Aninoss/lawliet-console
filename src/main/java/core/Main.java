@@ -10,9 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            new Console();
+            if (System.getenv("SYNC_HOST") != null) {
+                new Console();
+                SyncManager.getInstance().start();
+            }
             new HttpServer(80);
-            SyncManager.getInstance().start();
         } catch (Throwable e) {
             LOGGER.error("Could not start up!", e);
         }

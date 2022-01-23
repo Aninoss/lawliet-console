@@ -1,9 +1,7 @@
 package syncserver;
 
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.client.WebSocketJsonClient;
-
 import java.net.URISyntaxException;
+import org.java_websocket.client.WebSocketJsonClient;
 
 public class SyncManager {
 

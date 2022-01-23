@@ -21,7 +21,7 @@ repositories {
 dependencies {
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
     implementation 'org.json:json:20180813'
-    implementation 'com.github.Aninoss:Java-WebSocket:sending-json-events-SNAPSHOT'
+    implementation 'com.github.Aninoss:Java-WebSocket:94609ebb95'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'org.apache.logging.log4j:log4j-to-slf4j:2.13.1'
 }
