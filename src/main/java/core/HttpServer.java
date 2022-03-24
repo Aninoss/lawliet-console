@@ -1,11 +1,11 @@
 package core;
 
+import java.io.IOException;
+import java.util.Arrays;
 import fi.iki.elonen.NanoHTTPD;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.IOException;
-import java.util.Arrays;
 
 public class HttpServer extends NanoHTTPD {
 

@@ -1,6 +1,5 @@
 package core;
 
-import syncserver.SyncManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +11,6 @@ public class Main {
         try {
             if (System.getenv("SYNC_HOST") != null) {
                 new Console();
-                SyncManager.getInstance().start();
             }
             new HttpServer(80);
         } catch (Throwable e) {

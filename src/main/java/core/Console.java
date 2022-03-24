@@ -3,15 +3,13 @@ package core;
 import core.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import syncserver.SendEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Console {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(Console.class);
+
+    private final SyncApi syncApi = new SyncApi();
 
     public Console() {
         new Thread(this::run).start();
@@ -41,7 +39,7 @@ public class Console {
             readLine = readLine.substring(first.length() + 1);
         }
 
-        SendEvent.sendCommand(clusterId, readLine)
+        syncApi.sendCommand(clusterId, readLine)
                 .exceptionally(ExceptionLogger.get());
     }
 
