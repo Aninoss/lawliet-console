@@ -37,7 +37,9 @@ public class SyncApi {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) {
-                future.complete(null);
+                try (ResponseBody responseBody = response.body()) {
+                    future.complete(null);
+                }
             }
         });
 
